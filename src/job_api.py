@@ -7,7 +7,7 @@ load_dotenv()
 apify_client = ApifyClient(os.getenv("APIFY_API_TOKEN"))
 
 # Fetch LinkedIn jobs based on search query and location
-def fetch_linkedin_jobs(search_query, location = "ireland", rows=100):
+def fetch_linkedin_jobs(search_query, location = "ireland", rows=20):
     run_input = {
         "title": search_query,
         "loaction": location,
@@ -22,10 +22,10 @@ def fetch_linkedin_jobs(search_query, location = "ireland", rows=100):
     return jobs
 
 # Fetch Indeed jobs based on search query and location
-def fetch_indeed_jobs(search_query, location = "ireland", rows=100):
+def fetch_indeed_jobs(search_query, location = "ireland", rows=20):
     run_input = {
         "keywords": search_query,
-        "maxJobs": 60,
+        "maxJobs": 20,
         "freshness": "all",
         "sortBy": "relevance",
         "experience": "all",

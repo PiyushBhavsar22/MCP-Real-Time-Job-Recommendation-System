@@ -13,13 +13,13 @@ if uploaded_file:
         resume_text = extract_text_from_pdf(uploaded_file)
 
     with st.spinner("Summarizing the Resume..."):
-        summary = ask_openai(f"Summarize the Resume highlighting the skills, education, and experience: \n\n{resume_text}", max_tokens=500)
+        summary = ask_openai(f"Summarize the Resume highlighting the skills, education, and experience: \n\n{resume_text}", max_tokens=100)
 
     with st.spinner("Finding Skill gaps..."):
-        gaps = ask_openai(f"Analyze this resume and highlight missing skills, certification, and experience needed for better job opportunities: \n\n{resume_text}", max_tokens=500)
+        gaps = ask_openai(f"Analyze this resume and highlight missing skills, certification, and experience needed for better job opportunities: \n\n{resume_text}", max_tokens=100)
 
     with st.spinner("Creating Future Roadmap..."):
-        roadmap = ask_openai(f"Based on the resume suggest a future roadmap to improve industry exposure: \n\n{resume_text}", max_tokens=500)
+        roadmap = ask_openai(f"Based on the resume suggest a future roadmap to improve industry exposure: \n\n{resume_text}", max_tokens=100)
 
     # Diplay the Result
     st.markdown("---")
@@ -40,7 +40,7 @@ if uploaded_file:
         with st.spinner("Fetching job recommendation..."):
             keywords = ask_openai(
                 f"Based on the Resume summary, suggest the best job titles and keywords for searching job. Give a comma-separated list only, no explanation. \n\nSummary: {summary}",
-                max_tokens=200
+                max_tokens=100
             )
 
             search_keywords_clean = keywords.replace("\n", "").strip()
@@ -48,8 +48,8 @@ if uploaded_file:
         st.success(f"Extracted Job Keywords: {search_keywords_clean}")
 
         with st.spinner("Fetching jobs from LinkedIn and Naukri..."):
-            linkedin_jobs = fetch_linkedin_jobs(search_keywords_clean, rows=80)
-            indeed_jobs = fetch_indeed_jobs(search_keywords_clean, rows=80)
+            linkedin_jobs = fetch_linkedin_jobs(search_keywords_clean, rows=20)
+            indeed_jobs = fetch_indeed_jobs(search_keywords_clean, rows=20)
 
         st.markdown("---")
         st.header("Top LinkedIn Jobs")

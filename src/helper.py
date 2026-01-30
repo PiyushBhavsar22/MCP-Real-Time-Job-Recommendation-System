@@ -17,9 +17,9 @@ def extract_text_from_pdf(uploaded_file):
         text += page.get_text()
     return text
 
-def ask_openai(prompt, max_tokens=500):
+def ask_openai(prompt, max_tokens=100):
     response = client.chat.completions.create(
-        model="gpt-4o",
+        model="gpt-4o-mini",
         messages=[
             {
                 "role":"user",
